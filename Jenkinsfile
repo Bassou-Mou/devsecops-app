@@ -26,7 +26,7 @@ pipeline {
         sh 'docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} .'
       }
     }
-  }
+
     stage('Trivy FS Scan') {
       steps {
         sh '''
@@ -38,6 +38,7 @@ pipeline {
         '''
       }
     }
+
     stage('Trivy Image Scan') {
       steps {
         sh '''
@@ -48,6 +49,8 @@ pipeline {
         '''
       }
     }
+  }
+
   post {
     success { echo "Build ${BUILD_NUMBER} OK" }
     failure { echo "Build ${BUILD_NUMBER} KO" }
